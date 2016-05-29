@@ -49,7 +49,3 @@ export OPENSHIFT_PHP_VERSION=${NGINX_VERSION}
 echo "${NGINX_VERSION}" > ${OPENSHIFT_PHP_DIR}/env/OPENSHIFT_PHP_VERSION
 echo "${OPENSHIFT_PHP_DIR}/usr/cartridge-${OPENSHIFT_PHP_VERSION}" > ${OPENSHIFT_PHP_DIR}/env/OPENSHIFT_PHP_VERSION_DIR
 
-cp ${OPENSHIFT_PHP_DIR}/conf/php-fpm.ini.erb ${OPENSHIFT_REPO_DIR}/.openshift/php-fpm.ini.erb
-cp ${OPENSHIFT_PHP_DIR}/conf/php-fpm.conf.erb ${OPENSHIFT_REPO_DIR}/.openshift/php-fpm.conf.erb
-cp ${OPENSHIFT_PHP_EXTENSION_DIR}/extension.ini.erb ${OPENSHIFT_REPO_DIR}/.openshift/extension.ini.erb
-cp ${OPENSHIFT_PHP_DIR}/conf/nginx_http.conf ${OPENSHIFT_REPO_DIR}/.openshift/nginx.conf.erb
