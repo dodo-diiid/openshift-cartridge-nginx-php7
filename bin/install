@@ -17,10 +17,7 @@ elif [ -d "${OPENSHIFT_PHP_DIR}/usr/cartridge-${version}/" ]; then
 fi
 PHP_VERSION_DIR=${OPENSHIFT_PHP_DIR}/usr/cartridge-${PHP_VERSION}
 
-cp ${OPENSHIFT_PHP_DIR}/conf/php-fpm.ini.erb ${OPENSHIFT_REPO_DIR}/.openshift/php-fpm.ini.erb
-cp ${OPENSHIFT_PHP_DIR}/conf/php-fpm.conf.erb ${OPENSHIFT_REPO_DIR}/.openshift/php-fpm.conf.erb
-cp ${OPENSHIFT_PHP_EXTENSION_DIR}/extension.ini.erb ${OPENSHIFT_REPO_DIR}/.openshift/extension.ini.erb
-cp ${OPENSHIFT_PHP_DIR}/conf/nginx_http.conf ${OPENSHIFT_REPO_DIR}/.openshift/nginx.conf.erb
+
 
 # Install/Update composer
 COMPOSER_PATH=${OPENSHIFT_PHP_DIR}/composer/bin/composer
@@ -38,6 +35,11 @@ cp ${OPENSHIFT_PHP_DIR}/metadata/manifest.yml ${OPENSHIFT_PHP_DIR}/usr/bin/manif
 
 # Install pecl on update
 ${OPENSHIFT_PHP_DIR}/bin/control build
+
+cp ${OPENSHIFT_PHP_DIR}/conf/php-fpm.ini.erb ${OPENSHIFT_REPO_DIR}/.openshift/php-fpm.ini.erb
+cp ${OPENSHIFT_PHP_DIR}/conf/php-fpm.conf.erb ${OPENSHIFT_REPO_DIR}/.openshift/php-fpm.conf.erb
+cp ${OPENSHIFT_PHP_EXTENSION_DIR}/extension.ini.erb ${OPENSHIFT_REPO_DIR}/.openshift/extension.ini.erb
+cp ${OPENSHIFT_PHP_DIR}/conf/nginx_http.conf ${OPENSHIFT_REPO_DIR}/.openshift/nginx.conf.erb
 
 # Result for the client
 if [ "${OPENSHIFT_GEAR_DNS}" == "${OPENSHIFT_APP_DNS}" ]; then
