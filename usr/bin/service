@@ -15,7 +15,9 @@ export STARTTIMEOUT=20
 PHP_FPM_EXEC=${OPENSHIFT_PHP_VERSION_DIR}/sbin/php-fpm
 PHP_FPM_PID=${OPENSHIFT_PHP_DIR}/pid/php-fpm-${OPENSHIFT_GEAR_UUID}.pid
 PHP_FPM_CONFIG_FILE=${OPENSHIFT_PHP_DIR}/conf/php-fpm.conf
+PHP_FPM_EXT=${OPENSHIFT_PHP_DIR}/conf/ext/extension.ini
 PHP_CONFIG_FILE=${OPENSHIFT_PHP_DIR}/conf/php-fpm.ini
+
 
 NGINX_EXEC=${OPENSHIFT_PHP_VERSION_DIR}/sbin/nginx
 NGINX_CONFIG_FILE=${OPENSHIFT_PHP_DIR}/conf/nginx.conf
@@ -211,6 +213,8 @@ function _php_update_conf() {
     else
         oo-erb ${OPENSHIFT_PHP_DIR}/conf/php-fpm.ini.erb > ${PHP_CONFIG_FILE}
     fi
+    
+    oo-erb ${OPENSHIFT_PHP_EXTENSION_DIR}/extension.ini.erb > ${PHP_FPM_EXT}
     
     # Composer self-update
     COMPOSER_PATH=${OPENSHIFT_PHP_DIR}/composer/bin/composer
