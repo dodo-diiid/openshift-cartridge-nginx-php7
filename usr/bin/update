@@ -55,53 +55,7 @@ function update_process() {
         fi
 
         mkdir "/tmp/binary"
-        tar -xf "/tmp/binary.tar.gz" -C "/tmp/binary" --strip-components=1
-
-        echo "Preparing to apply update..."
-        
-        service php-fpm stop
-        service nginx stop
-
-        echo "Applying update..."
-        if [ -d "/tmp/binary/usr/" ]; then
-        	rm -rf "${OPENSHIFT_PHP_DIR}usr/"
-        	cp -r "/tmp/binary/usr/" $OPENSHIFT_PHP_DIR
-
-        	echo "Finishing update..."
-        	rm -rf "/tmp/binary"
-        	rm -f "/tmp/update_version"
-        	cp /tmp/manifest_latest.yml ${OPENSHIFT_PHP_DIR}/usr/bin/manifest.yml
-        	rm -f "/tmp/manifest_latest.yml"
-            service nginx start
-        	service php-fpm start
-            echo "Update binary complete!"
-        else
-        	service nginx start
-        	service php-fpm start
-        	echo "Update failed, file binary corrupted!"
-        fi
-       
-}
-
-function update_process_dev() {
-		
-        wget -q -O /tmp/manifest_latest.yml $MANIFEST_URL
-        
-		URL="https://bitbucket.org/budisteikul/openshift-cartridge-nginx-php7/get/master.tar.gz"
-		echo "Downloading binary.tar.gz..."
-        
-        wget -O /tmp/binary.tar.gz $URL
-        
-        # curl $URL -L > "/tmp/binary.tar.gz" --progress-bar
-
-        echo "Extracting binary.tar.gz..."
-        
-        if [ -d "/tmp/binary" ]; then
-            rm -rf "/tmp/binary"
-        fi
-
-        mkdir "/tmp/binary"
-        tar -xf "/tmp/binary.tar.gz" -C "/tmp/binary" --strip-components=1
+        tar -xf "/tmp/binary.tar.gz" -C "/tmp/binary" --strip-components=1 --warning=no-timestamp
 
         echo "Preparing to apply update..."
         
@@ -133,10 +87,6 @@ function force() {
 		update_process
 }
 
-function dev() {
-		update_process_dev
-}
-
 function install() {
     
     if [ ! -f /tmp/update_version ]; then
@@ -160,6 +110,5 @@ case "$1" in
     check)      check;;
     install)    install;;
     force)   	force;;
-    dev)   	    dev;;
     *)          check
 esac
