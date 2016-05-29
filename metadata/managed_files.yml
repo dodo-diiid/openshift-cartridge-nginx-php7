@@ -1,0 +1,10 @@
+locked_files:
+- bin/
+- bin/*
+- env/
+- env/*
+processed_templates:
+- 'conf/nginx.conf.erb'
+- 'conf/nginx_http.conf.erb'
+setup_rewritten:
+- conf/*
