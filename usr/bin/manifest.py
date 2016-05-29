@@ -3,7 +3,7 @@
 import sys
 import yaml
 
-prefix = sys.argv[3]
+prefix = sys.argv[2]
 
 with open(sys.argv[1], 'r') as manifest_file: manifest = yaml.load(manifest_file)
 
