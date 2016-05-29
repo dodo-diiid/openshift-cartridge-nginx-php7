@@ -215,7 +215,7 @@ function _php_update_conf() {
         oo-erb ${OPENSHIFT_PHP_DIR}/conf/php-fpm.ini.erb > ${PHP_CONFIG_FILE}
     fi
     
-    if [ -f "${CONFIG_FILE}" ]; then
+    if [ -f "${EXT_FILE}" ]; then
         oo-erb ${EXT_FILE} > ${PHP_FPM_EXT}
     else
         oo-erb ${OPENSHIFT_PHP_EXTENSION_DIR}/extension.ini.erb > ${PHP_FPM_EXT}
