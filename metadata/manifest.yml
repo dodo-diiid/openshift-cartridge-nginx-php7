@@ -5,7 +5,7 @@ License: MIT
 Version: "1.0.0"
 Versions:
 - 1.0.4
-- 1.11.0
+- 1.11.1
 - 7.0.7
 Website: https://github.com/budisteikul/openshift-cartridge-nginx-php7
 Cartridge-Version: 1.0.0
@@ -47,7 +47,7 @@ Cart-Data:
   Type: environment
   Description: Unique ID which identified the gear. This value changes between gears.
 Provides:
-  - nginx-1.11.0
+  - nginx-1.11.1
   - nginx
   - php-fpm
   - php-7.0.7
