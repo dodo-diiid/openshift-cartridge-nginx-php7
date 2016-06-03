@@ -64,8 +64,8 @@ function update_process() {
 
         echo "Applying update..."
         if [ -d "/tmp/binary/usr/" ]; then
-        	rm -rf "${OPENSHIFT_PHP_DIR}usr/"
-        	cp -r "/tmp/binary/usr/" $OPENSHIFT_PHP_DIR
+        	# rm -rf "${OPENSHIFT_PHP_DIR}usr/"
+        	cp -rf "/tmp/binary/usr/" $OPENSHIFT_PHP_DIR
 
         	echo "Finishing update..."
         	rm -rf "/tmp/binary"
