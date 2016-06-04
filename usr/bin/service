@@ -190,10 +190,11 @@ function _php_status() {
 
 function _nginx_update_conf() {
     CONF_FILE=${OPENSHIFT_REPO_DIR}/.openshift/nginx.conf.erb
+    oo-erb ${OPENSHIFT_PHP_DIR}/usr/conf/nginx.conf.erb > ${NGINX_CONFIG_FILE}
     if [ -f "${CONF_FILE}" ]; then
         oo-erb ${CONF_FILE} > ${NGINX_HTTP_CONFIG_FILE}
     else
-        echo "Failed updating .openshift/nginx.conf.erb, file not found"
+    	oo-erb ${OPENSHIFT_PHP_DIR}/usr/conf/nginx_http.conf.erb > ${NGINX_HTTP_CONFIG_FILE}
     fi
 }
 
@@ -206,13 +207,13 @@ function _php_update_conf() {
     if [ -f "${FPM_CONFIG_FILE}" ]; then
         oo-erb ${FPM_CONFIG_FILE} > ${PHP_FPM_CONFIG_FILE}
     else
-        oo-erb ${OPENSHIFT_PHP_DIR}/conf/php-fpm.conf.erb > ${PHP_FPM_CONFIG_FILE}
+        oo-erb ${OPENSHIFT_PHP_DIR}/usr/conf/php-fpm.conf.erb > ${PHP_FPM_CONFIG_FILE}
     fi
     
     if [ -f "${CONFIG_FILE}" ]; then
         oo-erb ${CONFIG_FILE} > ${PHP_CONFIG_FILE}
     else
-        oo-erb ${OPENSHIFT_PHP_DIR}/conf/php-fpm.ini.erb > ${PHP_CONFIG_FILE}
+        oo-erb ${OPENSHIFT_PHP_DIR}/usr/conf/php-fpm.ini.erb > ${PHP_CONFIG_FILE}
     fi
     
     if [ -f "${EXT_FILE}" ]; then
