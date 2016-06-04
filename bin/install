@@ -17,14 +17,9 @@ fi
 # Copy manifest file for update
 cp ${OPENSHIFT_PHP_DIR}/metadata/manifest.yml ${OPENSHIFT_PHP_DIR}/usr/bin/manifest.yml
 
-# Install pecl on update
-${OPENSHIFT_PHP_DIR}/bin/control build
-
 # Result for the client
 if [ "${OPENSHIFT_GEAR_DNS}" == "${OPENSHIFT_APP_DNS}" ]; then
     client_result ""
     client_result "Cartridge enviroment successfully installed."
-    client_result ""
-    client_result " Version: ${PHP_VERSION}"
     client_result ""
 fi
