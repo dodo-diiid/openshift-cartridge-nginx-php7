@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Updater script for this cartridge
-
-MANIFEST_URL="http://cartreflect-claytondev.rhcloud.com/github/budisteikul/openshift-cartridge-nginx-php7"
+MANIFEST_URL="https://bitbucket.org/budisteikul/openshift-cartridge-nginx-php7/raw/dff92a2e7d183f469be6f11be98494921957de37/manifest"
+# MANIFEST_URL="http://cartreflect-claytondev.rhcloud.com/github/budisteikul/openshift-cartridge-nginx-php7"
 MANIFEST_PARSER="${OPENSHIFT_PHP_DIR}usr/bin/manifest.py"
 # MANIFEST_LOCAL="${OPENSHIFT_PHP_DIR}metadata/manifest.yml"
 
@@ -41,7 +41,8 @@ function update_process() {
 		
         wget -q -O /tmp/manifest_latest.yml $MANIFEST_URL
         
-		URL="https://github.com/budisteikul/openshift-cartridge-nginx-php7/archive/master.tar.gz"
+        URL="https://bitbucket.org/budisteikul/openshift-cartridge-nginx-php7/get/master.tar.gz"
+		# URL="https://github.com/budisteikul/openshift-cartridge-nginx-php7/archive/master.tar.gz"
 		echo "Downloading binary.tar.gz..."
         
         wget -O /tmp/binary.tar.gz $URL

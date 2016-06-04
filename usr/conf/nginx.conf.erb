@@ -35,7 +35,7 @@ events {
 }
 
 http {
-    include <%= ENV['OPENSHIFT_PHP_VERSION_DIR'] %>/conf/mime.types;
+    include <%= ENV['OPENSHIFT_PHP_DIR'] %>/usr/conf/mime.types;
     default_type application/octet-stream;
 
     client_body_temp_path  <%= ENV['OPENSHIFT_TMP_DIR'] %>/client_temp;
