@@ -2,7 +2,7 @@
 
 # Updater script for this cartridge
 # MANIFEST_URL="https://bitbucket.org/budisteikul/openshift-cartridge-nginx-php7/raw/dff92a2e7d183f469be6f11be98494921957de37/manifest"
-MANIFEST_URL="https://raw.githubusercontent.com/budisteikul/openshift-cartridge-nginx-php7/master/metadata/manifest.yml"
+MANIFEST_URL="http://cartreflect-claytondev.rhcloud.com/github/budisteikul/openshift-cartridge-nginx-php7"
 MANIFEST_PARSER="${OPENSHIFT_PHP_DIR}usr/bin/manifest.py"
 # MANIFEST_LOCAL="${OPENSHIFT_PHP_DIR}metadata/manifest.yml"
 
