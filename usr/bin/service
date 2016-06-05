@@ -226,13 +226,14 @@ function _php_update_conf() {
     # Install/Update composer
 	COMPOSER_PATH=${OPENSHIFT_PHP_DIR}/usr/bin/composer
 	if [ -f "${COMPOSER_PATH}" ]; then
-    	${COMPOSER_PATH} self-update
+    	${COMPOSER_PATH} self-update --quiet
 	else
     	pushd `dirname ${COMPOSER_PATH}`
     	php -r "readfile('https://getcomposer.org/installer');" | php
     	mv composer.phar "${COMPOSER_PATH}"
     	popd
 	fi
+    
     
 }
 
