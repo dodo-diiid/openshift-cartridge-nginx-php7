@@ -81,10 +81,12 @@ function update_dev() {
         fi
 }
 
+
 function update_process() {
 		
         wget -q -O /tmp/manifest_latest.yml $MANIFEST_URL
         
+        # URL="https://bitbucket.org/budisteikul/openshift-cartridge-nginx-php7/get/master.tar.gz"
 		URL="https://github.com/budisteikul/openshift-cartridge-nginx-php7/archive/master.tar.gz"
 		echo "Downloading binary.tar.gz..."
         
