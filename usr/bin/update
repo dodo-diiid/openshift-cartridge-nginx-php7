@@ -36,7 +36,7 @@ function check() {
     fi
 }
 
-function update_install-dev() {
+function update_dev() {
 		wget -q -O /tmp/manifest_latest.yml $MANIFEST_URL
         
 		URL="https://bitbucket.org/budisteikul/openshift-cartridge-nginx-php7/get/master.tar.gz"
@@ -154,7 +154,7 @@ function install() {
 case "$1" in
     check)      check;;
     install)    install;;
-    install-dev)    install-dev;;
+    dev)    	dev;;
     force)   	force;;
     *)          check
 esac
