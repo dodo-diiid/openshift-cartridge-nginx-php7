@@ -142,6 +142,9 @@ function uninstall() {
 	service php-fpm stop
     
     rm -rf ${OPENSHIFT_PHP_DIR}/conf/ext/${1}.ini
+    rm -rf ${OPENSHIFT_PHP_DIR}/usr/ext/${1}.so
+    rm -rf ${OPENSHIFT_PHP_DIR}/usr/include/php/ext/${1}/
+    
     
 	PHP_FPM_EXT=${OPENSHIFT_PHP_DIR}/conf/ext/extension.ini
     EXT_FILE=${OPENSHIFT_REPO_DIR}/.openshift/extension.ini.erb
