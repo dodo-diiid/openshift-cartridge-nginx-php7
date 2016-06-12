@@ -77,7 +77,7 @@
 #define PHP_BIRDSTEP_LIBS        ""
 #define PEAR_INSTALLDIR         ""
 #define PHP_INCLUDE_PATH	".:"
-#define PHP_EXTENSION_DIR       "${OPENSHIFT_PHP_DIR}/usr/ext"
+#define PHP_EXTENSION_DIR       "${OPENSHIFT_PHP_DIR}/ext"
 #define PHP_PREFIX              "${OPENSHIFT_PHP_DIR}/usr"
 #define PHP_BINDIR              "${OPENSHIFT_PHP_DIR}/usr/bin"
 #define PHP_SBINDIR             "${OPENSHIFT_PHP_DIR}/usr/sbin"

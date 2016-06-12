@@ -25,7 +25,7 @@
 # etc.  If ICU is not installed in this directory, you must change the
 # following line.  There should exist $(prefix)/include/unicode/utypes.h
 # for example.
-prefix = /root/openshift/php/compile/catridge/usr/libs
+prefix = /var/lib/openshift/nginx-php/php/catridge/usr/libs
 exec_prefix = ${prefix}
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
