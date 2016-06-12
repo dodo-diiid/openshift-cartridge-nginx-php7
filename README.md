@@ -37,6 +37,7 @@ The web root directory is `public/`. Make changes to your website there, then co
 
 ## PECL
 To install/uninstall pecl extension just run ssh to your application and run `php-pecl` command
+<br />
 Example :
 ```
 php-pecl install apcu 5.1.5
