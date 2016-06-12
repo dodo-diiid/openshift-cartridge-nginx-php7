@@ -9,12 +9,12 @@
 
 ## Installation
 ### Web Console
-Click [here](https://openshift.redhat.com/app/console/application_type/custom?unlock=true&application_type%5Bcartridges%5D=http%3A%2F%2Fcartreflect-claytondev.rhcloud.com%2Fgithub%2Fbudisteikul%2Fopenshift-cartridge-nginx-php7) for installation via web console. <br />
-Alternatively, you can use this [cartridge definition](http://cartreflect-claytondev.rhcloud.com/github/budisteikul/openshift-cartridge-nginx-php7) on application creation page.
+Click [here](https://openshift.redhat.com/app/console/application_type/custom?unlock=true&application_type%5Bcartridges%5D=http%3A%2F%2Fcartreflect-claytondev.rhcloud.com%2Fgithub%2Fbudisteikul%2Fopenshift-cartridge-nginx-php7%3Fcommit%3D1.7.0) for installation via web console. <br />
+Alternatively, you can use this [cartridge definition](http://cartreflect-claytondev.rhcloud.com/github/budisteikul/openshift-cartridge-nginx-php7?commit=1.7.0) on application creation page.
 
 ### Command Line
 ```
-rhc app create appname http://cartreflect-claytondev.rhcloud.com/github/budisteikul/openshift-cartridge-nginx-php7
+rhc app create appname http://cartreflect-claytondev.rhcloud.com/github/budisteikul/openshift-cartridge-nginx-php7?commit=1.7.0
 ```
 ## Updates
 You can update the binaries from the cartridge without reinstalling. To check for updates, SSH to your app and run this command:

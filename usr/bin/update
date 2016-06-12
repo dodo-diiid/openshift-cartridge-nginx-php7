@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Updater script for this cartridge
-# MANIFEST_URL="https://bitbucket.org/budisteikul/openshift-cartridge-nginx-php7/raw/dff92a2e7d183f469be6f11be98494921957de37/manifest"
 MANIFEST_URL="http://cartreflect-claytondev.rhcloud.com/github/budisteikul/openshift-cartridge-nginx-php7"
 MANIFEST_PARSER="${OPENSHIFT_PHP_DIR}usr/bin/manifest.py"
 # MANIFEST_LOCAL="${OPENSHIFT_PHP_DIR}metadata/manifest.yml"
@@ -37,12 +36,57 @@ function check() {
     fi
 }
 
+function update_master()
+{
+		wget -q -O /tmp/manifest_latest.yml $MANIFEST_URL
+   		eval $(python $MANIFEST_PARSER /tmp/manifest_latest.yml 'REMOTE_')
+		URL="https://github.com/budisteikul/openshift-cartridge-nginx-php7/archive/master.tar.gz"
+		
+        echo "Downloading binary.tar.gz..."
+        
+        wget -O /tmp/binary.tar.gz $URL
+
+        echo "Extracting binary.tar.gz..."
+        
+        if [ -d "/tmp/binary" ]; then
+            rm -rf "/tmp/binary"
+        fi
+
+        mkdir "/tmp/binary"
+        tar -xf "/tmp/binary.tar.gz" -C "/tmp/binary" --strip-components=1 --warning=no-timestamp
+
+        echo "Preparing to apply update..."
+        
+        service php-fpm stop
+        service nginx stop
+
+        echo "Applying update..."
+        if [ -d "/tmp/binary/usr/" ]; then
+        	rsync -a "/tmp/binary/usr/" ${OPENSHIFT_PHP_DIR}/usr/
+
+        	echo "Finishing update..."
+        	rm -rf "/tmp/binary"
+        	rm -f "/tmp/update_version"
+        	cp /tmp/manifest_latest.yml ${OPENSHIFT_PHP_DIR}/usr/bin/manifest.yml
+        	rm -f "/tmp/manifest_latest.yml"
+            
+            service nginx start
+        	service php-fpm start
+            echo "Update binary complete!"
+        else
+        	service nginx start
+        	service php-fpm start
+        	echo "Update failed, file binary corrupted!"
+        fi
+}
+
 function update_process() {
 		
-        wget -q -O /tmp/manifest_latest.yml $MANIFEST_URL
+   		wget -q -O /tmp/manifest_latest.yml $MANIFEST_URL
         
-        # URL="https://bitbucket.org/budisteikul/openshift-cartridge-nginx-php7/get/master.tar.gz"
-		URL="https://github.com/budisteikul/openshift-cartridge-nginx-php7/archive/master.tar.gz"
+   		eval $(python $MANIFEST_PARSER /tmp/manifest_latest.yml 'REMOTE_')
+        
+				URL="https://github.com/budisteikul/openshift-cartridge-nginx-php7/archive/${REMOTE_CARTRIDGE_VERSION}.tar.gz"
 		echo "Downloading binary.tar.gz..."
         
         wget -O /tmp/binary.tar.gz $URL
@@ -84,8 +128,8 @@ function update_process() {
        
 }
 
-function force() {
-		update_process
+function master() {
+		update_master
 }
 
 function install() {
@@ -110,6 +154,6 @@ function install() {
 case "$1" in
     check)      check;;
     install)    install;;
-    force)   	force;;
+    master)   	master;;
     *)          check
 esac
