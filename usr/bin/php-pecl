@@ -141,7 +141,7 @@ function clean() {
 	service php-fpm stop
     
 	pushd ${OPENSHIFT_PHP_DIR}/conf/ext
-    rm -rf ${1}.ini
+    rm -rf *.ini
     popd
     
 	PHP_FPM_EXT=${OPENSHIFT_PHP_DIR}/conf/ext/extension.ini
