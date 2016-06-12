@@ -174,5 +174,6 @@ function install() {
 
 case "$1" in
     install)    install;;
+    clean)    clean;;
     *)         exit 0
 esac
