@@ -6,18 +6,18 @@ PHP_BIN_DIR=${OPENSHIFT_PHP_DIR}/usr/bin
 BUILD_DIR="${OPENSHIFT_TMP_DIR}/pecl-build"
 
 function download_and_unpack() {
-    if [ -z "${1}" ] || [ -z "${2}" ]; then
+    if [ -z "${2}" ] || [ -z "${3}" ]; then
         echo "download_and_unpack: expected two arguments"
         return 1
     fi
 
-    local pkg=${1}
-    local pkg_url=${2}
+    local pkg=${2}
+    local pkg_url=${3}
 
     # Determin the extraction directory
     local extract_dir=''
-    if [ ! -z "${3}" ]; then
-        extract_dir="${3}"
+    if [ ! -z "${4}" ]; then
+        extract_dir="${4}"
     else
         local pkg_len=${#pkg}
         if [[ "${pkg}" == *'.tar.gz' ]]; then
@@ -74,23 +74,24 @@ function download_and_unpack() {
 }
 
 function check() {
-    if [ -z "${1}" ] || [ -z "${2}" ]; then
+    if [ -z "${2}" ] || [ -z "${3}" ]; then
         echo "check_pecl: expected two arguments <ext> <version>"
         return 1
     fi
 
-    local pecl_version=`${PHP_BIN_DIR}/php -r "echo phpversion('${1}');"`
+    local pecl_version=`${PHP_BIN_DIR}/php -r "echo phpversion('${2}');"`
 
-    if [[ ${2} != ${pecl_version} ]]; then
-        echo "PHP pecl ${1} not installed or old version ${pecl_version}."
-        install_pecl ${1} ${2} ${3}
+    if [[ ${3} != ${pecl_version} ]]; then
+        echo "PHP pecl ${2} not installed or old version ${pecl_version}."
+        install_pecl ${2} ${3} ${4}
     else
-        echo "PHP pecl ${1} up to date, version: ${2}."
+        echo "PHP pecl ${2} up to date, version: ${3}."
     fi
 }
 
-function install_pecl() {
-    if [ -z "${1}" ] || [ -z "${2}" ]; then
+function install() {
+	service php-fpm stop
+    if [ -z "${2}" ] || [ -z "${3}" ]; then
         echo "check_pecl: expected two arguments <ext> <version>"
         return 1
     fi
@@ -98,17 +99,17 @@ function install_pecl() {
     mkdir -p ${BUILD_DIR}
     pushd ${BUILD_DIR}
 
-    local name=${1}-${2}
+    local name=${2}-${3}
     download_and_unpack ${name}.tgz http://pecl.php.net/get/${name}.tgz
     pushd ${name}
     
-    echo "Configuring ${1}."
+    echo "Configuring ${2}."
     ${PHP_BIN_DIR}/phpize
     ./configure \
     	--with-php-config=${PHP_BIN_DIR}/php-config \
-    	${3}
+    	${4}
     
-    echo "Compiling ${1}."
+    echo "Compiling ${2}."
     make install
 
     popd
@@ -119,11 +120,11 @@ function install_pecl() {
     rm -rf ${BUILD_DIR}
 
 	pushd ${OPENSHIFT_PHP_DIR}/conf/ext
-    rm -rf ${1}.ini
+    rm -rf ${2}.ini
     popd
     
     # Add extension to the php.ini
-    echo "extension=${1}.so" >> ${OPENSHIFT_PHP_DIR}/conf/ext/${1}.ini
+    echo "extension=${2}.so" >> ${OPENSHIFT_PHP_DIR}/conf/ext/${2}.ini
    
     
     PHP_FPM_EXT=${OPENSHIFT_PHP_DIR}/conf/ext/extension.ini
@@ -134,7 +135,7 @@ function install_pecl() {
         oo-erb ${OPENSHIFT_PHP_EXTENSION_DIR}/extension.ini.erb > ${PHP_FPM_EXT}
     fi
     
-    
+    service php-fpm start
 }
 
 function uninstall() {
@@ -150,23 +151,6 @@ function uninstall() {
         oo-erb ${OPENSHIFT_PHP_EXTENSION_DIR}/extension.ini.erb > ${PHP_FPM_EXT}
     fi
     
-    service php-fpm start
-}
-
-function install() {
-	service php-fpm stop
-	PECL_FILE=${OPENSHIFT_REPO_DIR}/.openshift/php-pecl.txt
-    if [ -f ${PECL_FILE} ]; then
-        OLDIFS=$IFS
-        IFS=$'\n'
-        for pecl in $(cat ${PECL_FILE}); do
-            if [ ! -z ${pecl} ]; then
-                IFS=' ' read -a pecl_args <<< "${pecl}"
-                install_pecl "${pecl_args[0]}" "${pecl_args[1]}" "${pecl_args[2]}"
-            fi
-        done
-        IFS=${OLDIFS}
-    fi
     service php-fpm start
 }
 
