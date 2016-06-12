@@ -141,6 +141,7 @@ function install() {
 function uninstall() {
 	service php-fpm stop
     
+    echo "Removing {1} extension..."
     rm -rf ${OPENSHIFT_PHP_DIR}/conf/ext/${1}.ini
     rm -rf ${OPENSHIFT_PHP_DIR}/usr/ext/${1}.so
     rm -rf ${OPENSHIFT_PHP_DIR}/usr/include/php/ext/${1}/
