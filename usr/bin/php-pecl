@@ -159,7 +159,7 @@ function uninstall() {
     	
     	service php-fpm start
     else
-    	echo "${1} extension not installed."
+    	echo "Error: ${1} extension is not installed."
     fi
 }
 
