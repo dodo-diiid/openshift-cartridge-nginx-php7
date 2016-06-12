@@ -126,6 +126,14 @@ function install_pecl() {
     if ! grep "extension=${1}.so" "${OPENSHIFT_PHP_DIR}/conf/ext/${1}.ini"; then
         echo "extension=${1}.so" >> ${OPENSHIFT_PHP_DIR}/conf/ext/${1}.ini
     fi
+    
+    PHP_FPM_EXT=${OPENSHIFT_PHP_DIR}/conf/ext/extension.ini
+    EXT_FILE=${OPENSHIFT_REPO_DIR}/.openshift/extension.ini.erb
+    if [ -f "${EXT_FILE}" ]; then
+        oo-erb ${EXT_FILE} > ${PHP_FPM_EXT}
+    else
+        oo-erb ${OPENSHIFT_PHP_EXTENSION_DIR}/extension.ini.erb > ${PHP_FPM_EXT}
+    fi
 }
 
 function install() {
