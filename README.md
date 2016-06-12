@@ -36,7 +36,7 @@ PHP-FPM will automatically load `.openshift/php-fpm.ini.erb`, `.openshift/php-fp
 The web root directory is `public/`. Make changes to your website there, then commit and push.
 
 ## PECL
-To install/uninstall pecl extension just run ssh to your application and run `php-pecl install <name> <ver>` command
+To install/uninstall pecl extension just run ssh to your application and run `php-pecl install <name> <ver>`
 <br />
 Example :
 ```
