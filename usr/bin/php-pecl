@@ -123,9 +123,8 @@ function install_pecl() {
     popd
     
     # Add extension to the php.ini
-    if ! grep "extension=${1}.so" "${OPENSHIFT_PHP_DIR}/conf/ext/${1}.ini"; then
-        echo "extension=${1}.so" >> ${OPENSHIFT_PHP_DIR}/conf/ext/${1}.ini
-    fi
+    echo "extension=${1}.so" >> ${OPENSHIFT_PHP_DIR}/conf/ext/${1}.ini
+   
     
     PHP_FPM_EXT=${OPENSHIFT_PHP_DIR}/conf/ext/extension.ini
     EXT_FILE=${OPENSHIFT_REPO_DIR}/.openshift/extension.ini.erb
