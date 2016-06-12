@@ -13,26 +13,16 @@ function check() {
     eval $(python $MANIFEST_PARSER /tmp/manifest_latest.yml 'REMOTE_')
     eval $(python $MANIFEST_PARSER ${OPENSHIFT_PHP_DIR}/usr/bin/manifest.yml 'LOCAL_')
 
-	if [ "$LOCAL_CARTRIDGE_VERSION" != "$REMOTE_CARTRIDGE_VERSION" ]; then
+    if [ "$LOCAL_CARTRIDGE_VERSION" != "$REMOTE_CARTRIDGE_VERSION" ]; then
     	echo "Cartridge ${REMOTE_CARTRIDGE_VERSION} is available"
+    	echo " > Nginx ${REMOTE_NGINX_VERSION}"
+    	echo " > PHP ${REMOTE_PHP_VERSION}"
+    	echo "Run \`update install\` to install updates."
         echo "available" > /tmp/update_version
     else
     	echo "Your Cartridge is up to date."
     fi
     
-    if [ "$LOCAL_NGINX_VERSION" != "$REMOTE_NGINX_VERSION" ]; then
-    	echo "Nginx ${REMOTE_NGINX_VERSION} is available"
-        echo "available" > /tmp/update_version
-    else
-    	echo "Your Nginx is up to date."
-    fi
-    
-    if [ "$LOCAL_PHP_VERSION" != "$REMOTE_PHP_VERSION" ]; then
-    	echo "PHP ${REMOTE_PHP_VERSION} is available"
-        echo "available" > /tmp/update_version
-    else
-    	echo "Your PHP is up to date"
-    fi
 }
 
 function update_process() {
