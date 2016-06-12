@@ -30,7 +30,7 @@ Make sure to have your backup just in case some things went wrong.
 Nginx will automatically include `.openshift/nginx.conf.erb` file.
 
 ### PHP-FPM
-PHP-FPM will automatically load `.openshift/php-fpm.ini.erb` and `.openshift/php-fpm.conf.erb` files.
+PHP-FPM will automatically load `.openshift/php-fpm.ini.erb`, `.openshift/php-fpm.conf.erb`, and `.openshift/extension.ini.erb` files.
 
 ## Website
 The web root directory is `public/`. Make changes to your website there, then commit and push.
