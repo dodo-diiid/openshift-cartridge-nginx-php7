@@ -38,11 +38,12 @@ The web root directory is `public/`. Make changes to your website there, then co
 ## PECL
 To install/uninstall pecl extension just run ssh to your application and run `php-pecl` command
 Example :
-`php-pecl install apcu 5.1.5`
-`php-pecl install mongodb 1.1.7`
-`php-pecl uninstall apcu`
-`php-pecl uninstall mongodb`
-
+```
+php-pecl install apcu 5.1.5
+php-pecl install mongodb 1.1.7
+php-pecl uninstall apcu
+php-pecl uninstall mongodb
+```
 
 ## Scripts
 This cartridge comes with different scripts for easy management of your app inside SSH.
