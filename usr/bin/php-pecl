@@ -119,7 +119,7 @@ function install_pecl() {
     rm -rf ${BUILD_DIR}
 
 	pushd ${OPENSHIFT_PHP_DIR}/conf/ext
-    rm -rf *.ini
+    rm -rf ${1}.ini
     popd
     
     # Add extension to the php.ini
@@ -133,9 +133,30 @@ function install_pecl() {
     else
         oo-erb ${OPENSHIFT_PHP_EXTENSION_DIR}/extension.ini.erb > ${PHP_FPM_EXT}
     fi
+    
+    
+}
+
+function clean() {
+	service php-fpm stop
+    
+	pushd ${OPENSHIFT_PHP_DIR}/conf/ext
+    rm -rf ${1}.ini
+    popd
+    
+	PHP_FPM_EXT=${OPENSHIFT_PHP_DIR}/conf/ext/extension.ini
+    EXT_FILE=${OPENSHIFT_REPO_DIR}/.openshift/extension.ini.erb
+    if [ -f "${EXT_FILE}" ]; then
+        oo-erb ${EXT_FILE} > ${PHP_FPM_EXT}
+    else
+        oo-erb ${OPENSHIFT_PHP_EXTENSION_DIR}/extension.ini.erb > ${PHP_FPM_EXT}
+    fi
+    
+    service php-fpm start
 }
 
 function install() {
+	service php-fpm stop
 	PECL_FILE=${OPENSHIFT_REPO_DIR}/.openshift/php-pecl.txt
     if [ -f ${PECL_FILE} ]; then
         OLDIFS=$IFS
@@ -148,6 +169,7 @@ function install() {
         done
         IFS=${OLDIFS}
     fi
+    service php-fpm start
 }
 
 case "$1" in
