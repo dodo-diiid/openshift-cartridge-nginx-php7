@@ -118,7 +118,7 @@ function install_pecl() {
     popd
     rm -rf ${BUILD_DIR}
 
-	pushd ${OPENSHIFT_REPO_DIR}/conf/ext
+	pushd ${OPENSHIFT_PHP_DIR}/conf/ext
     rm -rf *.ini
     popd
     

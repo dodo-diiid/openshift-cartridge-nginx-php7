@@ -247,6 +247,7 @@ function _php_build() {
 
     # Update configuration
     # config
+    php-pecl install
     
     _php_start
 }
