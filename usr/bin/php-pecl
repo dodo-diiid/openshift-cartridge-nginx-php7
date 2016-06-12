@@ -137,12 +137,10 @@ function install_pecl() {
     
 }
 
-function clean() {
+function uninstall() {
 	service php-fpm stop
     
-	pushd ${OPENSHIFT_PHP_DIR}/conf/ext
-    rm -rf *.ini
-    popd
+    rm -rf ${OPENSHIFT_PHP_DIR}/conf/ext/*.ini
     
 	PHP_FPM_EXT=${OPENSHIFT_PHP_DIR}/conf/ext/extension.ini
     EXT_FILE=${OPENSHIFT_REPO_DIR}/.openshift/extension.ini.erb
@@ -174,6 +172,6 @@ function install() {
 
 case "$1" in
     install)    install;;
-    clean)    clean;;
+    uninstall)    uninstall;;
     *)         exit 0
 esac
