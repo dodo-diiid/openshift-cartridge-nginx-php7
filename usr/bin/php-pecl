@@ -139,23 +139,28 @@ function install() {
 }
 
 function uninstall() {
-	service php-fpm stop
+    INI_FILE=${OPENSHIFT_PHP_DIR}/conf/ext/${1}.ini
+    if [ -f "${INI_FILE}" ]; then
+    	service php-fpm stop
     
-    echo "Removing ${1} extension..."
-    rm -rf ${OPENSHIFT_PHP_DIR}/conf/ext/${1}.ini
-    rm -rf ${OPENSHIFT_PHP_DIR}/usr/ext/${1}.so
-    rm -rf ${OPENSHIFT_PHP_DIR}/usr/include/php/ext/${1}/
-    echo "Done!"
+    	echo "Removing ${1} extension..."
+    	rm -rf ${OPENSHIFT_PHP_DIR}/conf/ext/${1}.ini
+    	rm -rf ${OPENSHIFT_PHP_DIR}/usr/ext/${1}.so
+    	rm -rf ${OPENSHIFT_PHP_DIR}/usr/include/php/ext/${1}/
+    	echo "Done!"
     
 	PHP_FPM_EXT=${OPENSHIFT_PHP_DIR}/conf/ext/extension.ini
-    EXT_FILE=${OPENSHIFT_REPO_DIR}/.openshift/extension.ini.erb
-    if [ -f "${EXT_FILE}" ]; then
-        oo-erb ${EXT_FILE} > ${PHP_FPM_EXT}
+    	EXT_FILE=${OPENSHIFT_REPO_DIR}/.openshift/extension.ini.erb
+    	if [ -f "${EXT_FILE}" ]; then
+        	oo-erb ${EXT_FILE} > ${PHP_FPM_EXT}
+    	else
+        	oo-erb ${OPENSHIFT_PHP_EXTENSION_DIR}/extension.ini.erb > ${PHP_FPM_EXT}
+    	fi
+    	
+    	service php-fpm start
     else
-        oo-erb ${OPENSHIFT_PHP_EXTENSION_DIR}/extension.ini.erb > ${PHP_FPM_EXT}
+    	echo "${1} extension not installed."
     fi
-    
-    service php-fpm start
 }
 
 
