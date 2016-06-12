@@ -53,8 +53,13 @@ This cartridge comes with different scripts for easy management of your app insi
 * `service` - A psuedo `/usr/bin/service` to start and stop services. Example:
     * `service php-fpm start`
 	* `service php-fpm stop`
+	* `service php-fpm restart`
 	* `service nginx start`
     * `service nginx stop`
+	* `service nginx restart`
 * `update` - Allows automatic update of the cartridge binaries.
     * `update check` - Check for updates
     * `update install` - Install updates
+* `php-pecl` - To install/uninstall pecl extension.
+    * `php-pecl install <name> <ver>` - Install pecl extension
+    * `php-pecl uninstall <name>` - Uninstall pecl extension
