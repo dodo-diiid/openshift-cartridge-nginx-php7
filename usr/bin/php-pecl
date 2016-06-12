@@ -141,7 +141,7 @@ function install() {
 function uninstall() {
 	service php-fpm stop
     
-    rm -rf ${OPENSHIFT_PHP_DIR}/conf/ext/*.ini
+    rm -rf ${OPENSHIFT_PHP_DIR}/conf/ext/${2}.ini
     
 	PHP_FPM_EXT=${OPENSHIFT_PHP_DIR}/conf/ext/extension.ini
     EXT_FILE=${OPENSHIFT_REPO_DIR}/.openshift/extension.ini.erb
@@ -155,7 +155,7 @@ function uninstall() {
 }
 
 case "$1" in
-    install)    install;;
-    uninstall)    uninstall;;
+    install)    install ${2} ${3} ${4};;
+    uninstall)    uninstall ${2};;
     *)         exit 0
 esac
