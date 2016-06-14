@@ -236,21 +236,6 @@ function _php_update_conf() {
     
 }
 
-function _php_build() {
-	# Stop fpm if running
-    if _is_running_php; then
-        _php_stop
-    fi
-
-	# Update configuration
-	_php_update_conf
-
-    # Update configuration
-    # config
-    
-    _php_start
-}
-
 # Service start and stop functions
 
 function php-fpm_start() {
@@ -268,7 +253,7 @@ function php-fpm_restart() {
 }
 
 function php-fpm_build() {
-    _php_build
+    _php_update_conf
 }
 
 function php-fpm_status() {
