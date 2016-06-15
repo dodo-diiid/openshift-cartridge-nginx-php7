@@ -20,7 +20,7 @@ function check() {
     	echo "Run \`update install\` to install updates."
         echo "available" > /tmp/update_version
     else
-    	echo "Your Cartridge is up to date."
+    	echo "Your cartridge version is ${LOCAL_CARTRIDGE_VERSION} and already up to date."
     fi
     
 }
