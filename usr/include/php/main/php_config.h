@@ -1320,7 +1320,7 @@
 #define HAVE_PG_CONFIG_H 1
 
 /* PostgreSQL 9.3 or later */
-/* #undef HAVE_PG_LO64 */
+#define HAVE_PG_LO64 1
 
 /* PostgreSQL 8.1 or later */
 #define HAVE_PG_LO_CREATE 1
@@ -1359,7 +1359,7 @@
 #define HAVE_PQESCAPE 1
 
 /* PostgreSQL 9.0 or later */
-/* #undef HAVE_PQESCAPELITERAL */
+#define HAVE_PQESCAPELITERAL 1
 
 /* PostgreSQL 8.1.4 or later */
 #define HAVE_PQESCAPE_BYTEA_CONN 1
@@ -2193,11 +2193,17 @@
 /* */
 #define PHPDBG_DEBUG 0
 
+/* Whether the system supports BlowFish salt */
+#define PHP_BLOWFISH_CRYPT 1
+
 /* PHP build date */
-#define PHP_BUILD_DATE "2016-06-12"
+#define PHP_BUILD_DATE "2016-06-23"
 
 /* Define if your system has fork/vfork/CreateProcess */
 #define PHP_CAN_SUPPORT_PROC_OPEN 1
+
+/* Whether the system supports extended DES salt */
+#define PHP_EXT_DES_CRYPT 1
 
 /* fpm group name */
 #define PHP_FPM_GROUP "nobody"
@@ -2235,6 +2241,9 @@
 /* Whether you have IRIX-style functions */
 /* #undef PHP_IRIX_TIME_R */
 
+/* Whether the system supports MD5 salt */
+#define PHP_MD5_CRYPT 1
+
 /* */
 #define PHP_MHASH_BC 1
 
@@ -2265,8 +2274,17 @@
 /* whether pwrite64 is default */
 /* #undef PHP_PWRITE_64 */
 
+/* Whether the system supports SHA256 salt */
+#define PHP_SHA256_CRYPT 1
+
+/* Whether the system supports SHA512 salt */
+#define PHP_SHA512_CRYPT 1
+
 /* */
 #define PHP_SIGCHILD 0
+
+/* Whether the system supports standard DES salt */
+#define PHP_STD_DES_CRYPT 1
 
 /* uname -a output */
 #define PHP_UNAME "Linux server 2.6.32-042stab113.21 #1 SMP Wed Mar 23 11:05:25 MSK 2016 x86_64 x86_64 x86_64 GNU/Linux"
