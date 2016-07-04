@@ -30,7 +30,7 @@ Make sure to have your backup just in case some things went wrong.
 Nginx will automatically include `.openshift/nginx.conf.erb` file.
 
 #### Best nginx configuration for Laravel users
-Change file `.openshift/nginx.conf.erb` to like this
+Edit file `.openshift/nginx.conf.erb` to like this
 ```
 # Enable Gzip
 gzip  on;
