@@ -38,4 +38,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/var/lib/openshift/nginx-php/php/catridge/usr/libs/lib'
+libdir='/var/lib/openshift/php/cartridge/usr/libs/lib'
