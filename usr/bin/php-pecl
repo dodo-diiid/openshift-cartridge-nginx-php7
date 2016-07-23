@@ -90,7 +90,7 @@ function check() {
 }
 
 function install() {
-	service php-fpm stop
+	
     if [ -z "${1}" ] || [ -z "${2}" ]; then
         echo "check_pecl: expected two arguments <ext> <version>"
         return 1
@@ -135,7 +135,7 @@ function install() {
         oo-erb ${OPENSHIFT_PHP_EXTENSION_DIR}/extension.ini.erb > ${PHP_FPM_EXT}
     fi
     
-    service php-fpm start
+    service php-fpm restart
 }
 
 function uninstall() {
