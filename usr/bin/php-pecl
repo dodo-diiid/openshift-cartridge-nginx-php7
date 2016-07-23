@@ -141,8 +141,6 @@ function install() {
 function uninstall() {
     INI_FILE=${OPENSHIFT_PHP_DIR}/conf/ext/${1}.ini
     if [ -f "${INI_FILE}" ]; then
-    	service php-fpm stop
-    
     	echo "Removing ${1} extension..."
     	rm -rf ${OPENSHIFT_PHP_DIR}/conf/ext/${1}.ini
     	rm -rf ${OPENSHIFT_PHP_DIR}/usr/ext/${1}.so
@@ -157,7 +155,7 @@ function uninstall() {
         	oo-erb ${OPENSHIFT_PHP_EXTENSION_DIR}/extension.ini.erb > ${PHP_FPM_EXT}
     	fi
     	
-    	service php-fpm start
+    	service php-fpm restart
     else
     	echo "Error: ${1} extension is not installed."
     fi
