@@ -1293,6 +1293,9 @@
 /* #undef HAVE_PCRE */
 
 /* */
+#define HAVE_PCRE_JIT_SUPPORT 1
+
+/* */
 /* #undef HAVE_PDO_DBLIB */
 
 /* */
@@ -2197,7 +2200,7 @@
 #define PHP_BLOWFISH_CRYPT 1
 
 /* PHP build date */
-#define PHP_BUILD_DATE "2016-09-18"
+#define PHP_BUILD_DATE "2016-10-16"
 
 /* Define if your system has fork/vfork/CreateProcess */
 #define PHP_CAN_SUPPORT_PROC_OPEN 1
