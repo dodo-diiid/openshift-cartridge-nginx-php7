@@ -4,7 +4,7 @@
 ## What's inside
 
 * Nginx: 1.11.5
-* PHP: 7.0.12
+* PHP: 7.0.13
 * Latest Composer
 
 ## Installation
